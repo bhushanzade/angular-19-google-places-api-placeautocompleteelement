@@ -1,27 +1,42 @@
 # AngularGoogleMapPlaces
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+## Enabling Firebase and Google Places API
 
-## Development server
+### 1. Enable Firebase
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Go to [Firebase Console](https://console.firebase.google.com/).
+2. Click **Add project** and follow the setup steps.
+3. Once your project is created, click the gear icon and select **Project settings**.
+4. Under **Your apps**, register your web app and follow the instructions to add Firebase SDK to your Angular project.
+5. Copy the Firebase config object and add it to your Angular environment files.
 
-## Code scaffolding
+### 2. Enable Google Places API
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Go to [Google Cloud Console](https://console.cloud.google.com/).
+2. Select your project (or create a new one).
+3. Navigate to **APIs & Services > Library**.
+4. Search for **Places API** and click **Enable**.
+5. Go to **APIs & Services > Credentials** and create an API key.
+6. Restrict the API key for security (HTTP referrers recommended).
+7. Use the API key in your Angular app to access Google Places services.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 3. Configure API Key in `googlemap.service.ts`
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Open the `googlemap.service.ts` file in your Angular project.
+2. Instead of hardcoding your API key, import the environment configuration:
+  ```typescript
+  import { environment } from '../environments/environment';
+  ```
+3. Use `environment.googleMapsApiKey` (or your configured key name) wherever the API key is required, for example:
+  ```typescript
+  const apiKey = environment.googleMapsApiKey;
+  ```
+4. Make sure your `environment.ts` and `environment.prod.ts` files contain the `googleMapsApiKey` property with your actual API key:
+  ```typescript
+  export const environment = {
+    // ...other properties
+    googleMapsApiKey: 'YOUR_API_KEY_HERE'
+  };
+  ```
+This approach keeps your API key secure and makes it easy to manage different keys for development and production.

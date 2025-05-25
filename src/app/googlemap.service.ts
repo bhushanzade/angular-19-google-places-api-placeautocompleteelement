@@ -4,8 +4,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class GoogleMapService {
+
+  /**
+   * A promise that resolves to the Google Maps JavaScript API.
+   * It is used to ensure that the script is loaded only once.
+   */
   private static googleMapPromise: Promise<typeof google.maps> | null = null;
   private static readonly CALLBACK_NAME = 'GooglePlaces_cb';
+
+  /**
+   * Replace with your actual Firebase API key.
+   * Make sure to restrict the key to your domain for security.
+   */
+  private static readonly API_KEY = 'Replace your firebase key';
 
   public getGoogleMapPlaces() {
     return this.loadGoogleMapPlace();
@@ -60,7 +71,7 @@ export class GoogleMapService {
     const query = {
       v: 'weekly',
       callback,
-      key: 'Replace your firebase key',
+      key: GoogleMapService.API_KEY,
       libraries: 'places',
       loading: 'async',
       language: 'en',
