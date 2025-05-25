@@ -1,0 +1,11 @@
+<div>
+  <label for="">Search Google Places</label>
+  <div class="address-group position-relative" #addressGroupContainer></div>
+  @if(placeJson()) {
+  <div>
+    <pre>
+      {{placeJson() | json}}
+    </pre>
+  </div>
+  }
+</div>

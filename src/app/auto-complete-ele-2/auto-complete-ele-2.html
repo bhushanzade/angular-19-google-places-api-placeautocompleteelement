@@ -1,0 +1,18 @@
+<div>
+  <div class="address-group position-relative" #addressGroupContainer>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fa-solid fa-location-dot"></i>
+      </span>
+      <div class="form-floating" #addressFieldContainer></div>
+    </div>
+    <div id="placeAutocompleteDropdown" #placeAutocompleteDropdown></div>
+  </div>
+  @if(placeJson()) {
+  <div>
+    <pre>
+        {{placeJson() | json}}
+      </pre>
+  </div>
+  }
+</div>
